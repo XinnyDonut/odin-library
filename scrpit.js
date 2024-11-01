@@ -8,13 +8,13 @@ let bookId=0;
 
 
 
-function Book(title,author,page){
+function Book(title,author,pages){
     this.title=title;
     this.author=author;
-    this.page=page;
+    this.pages=pages;
     this.read=false;
-    this.setRead=function(){
-        this.read=true;
+    this.toggleRead=function(){
+        return this.read=!this.read;
     }
 
 }
@@ -30,6 +30,7 @@ function display(book){
         const author=document.createElement("h3");
         const pages=document.createElement("h3");
         const deleteBtn=document.createElement("button");
+        const readBtn=document.createElement("button");
 
         bookDiv.setAttribute("id",`book-${ID}`);
         bookDiv.classList.add("book-div");
@@ -38,15 +39,23 @@ function display(book){
         author.textContent=`author: ${book.author}`;
         pages.textContent=`pages: ${book.pages}`;
         deleteBtn.textContent="Delete";
+        
         deleteBtn.onclick=function(){         
             const i=library.indexOf(book);
             library.splice(i,1);
             bookDiv.remove();        
         }
+
+        readBtn.textContent=book.read?"Read":"Not Read";
+        readBtn.addEventListener('click',e=>{
+            let status=book.toggleRead();
+            readBtn.textContent=status?"Read":"NotRead";
+        })
         bookDiv.appendChild(title);
         bookDiv.appendChild(author);
         bookDiv.appendChild(pages);
         bookDiv.appendChild(deleteBtn);
+        bookDiv.appendChild(readBtn);
         bookContainer.appendChild(bookDiv);   
 }
 
@@ -65,3 +74,7 @@ submitBtn.onclick=function(){
         alert("You need to fill in all fields")
     }   
 }
+
+
+display(new Book("Harry Potter and the Philosopher's Stone","J.K Rowling",223));
+display(new Book("Harry Potter and the Order of the Phoenix","J.K Rowling",766));
