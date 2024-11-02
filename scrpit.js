@@ -29,6 +29,7 @@ function display(book){
         const title=document.createElement("h2");
         const author=document.createElement("h3");
         const pages=document.createElement("h3");
+        const btnDiv=document.createElement("div");
         const deleteBtn=document.createElement("button");
         const readBtn=document.createElement("button");
 
@@ -51,11 +52,14 @@ function display(book){
             let status=book.toggleRead();
             readBtn.textContent=status?"Read":"NotRead";
         })
+        btnDiv.appendChild(deleteBtn)
+        btnDiv.appendChild(readBtn)
         bookDiv.appendChild(title);
         bookDiv.appendChild(author);
         bookDiv.appendChild(pages);
-        bookDiv.appendChild(deleteBtn);
-        bookDiv.appendChild(readBtn);
+        // bookDiv.appendChild(deleteBtn);
+        // bookDiv.appendChild(readBtn);
+        bookDiv.appendChild(btnDiv);
         bookContainer.appendChild(bookDiv);   
 }
 
